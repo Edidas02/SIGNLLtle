@@ -12,6 +12,8 @@ import string
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 PUBLIC_KEY = os.getenv('PUBLIC_KEY')
+
+command_prefix='!'
 client = discord.Client()
 
 @client.event
@@ -24,7 +26,8 @@ async def on_message(message):
     if message.author == client.user:
         return
     print(message.content)
-    await message.channel.send("Hello!")
+    if message.content[0] == '!':
+        await message.channel.send("Hello!")
 
 nltk.download("brown")
  
@@ -40,7 +43,7 @@ for sent in document:
   if len(new_sent) > 0:
     data.append(new_sent)
 
-model = w2v(sentences=data, vector_size=300, window=5, min_count=1, workers=4, epochs=50)
+model = w2v(sentences=data, vector_size=300, window=5, min_count=1, workers=4, epochs=5)
 
 
 client.run(os.getenv('BOT_TOKEN'))
