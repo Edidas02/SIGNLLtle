@@ -12,4 +12,14 @@ corpus = gensim.downloader.load('text8')
 model = w2v(corpus)
 data = [word for sent in corpus for word in sent]
 
+def get_random_word():
+    num = np.random.randint(0, len(data))
+    return data[num]
+def similarity_calc(guess,target):
+    if (guess not in model.wv):
+        return None
+    a = model.wv[guess]
+    b = model.wv[target]
+    return (np.dot(a, b))/(np.linalg.norm(a)*np.linalg.norm(b))
+
 
