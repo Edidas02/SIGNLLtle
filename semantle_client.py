@@ -37,7 +37,7 @@ async def on_message(message):
         await message.channel.send("Your guess is: " + guess)            #quit game
         if session_id in game_sessions.keys():
             similarity = game_sessions[session_id].make_guess(guess)
-            await message.channel.send("The similarity is: " + similarity)
+            await message.channel.send("The similarity is: " + str(similarity))
         else:
             await message.channel.send("Start a game before guessing")
     if len(command) == 1 and command[0] == "q":
